@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NLP Workstation Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans p-8">
+    <div class="max-w-6xl mx-auto">
+        <header class="flex justify-between items-center mb-12 border-b border-slate-800 pb-6">
+            <div>
+                <h1 class="text-4xl font-extrabold bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500 bg-clip-text text-transparent">Pipeline Control Hub</h1>
+                <p class="text-slate-400 mt-1">Select an analytical language vector engine to begin</p>
+            </div>
+            <a href="/" class="bg-slate-900 hover:bg-slate-800 border border-slate-800 text-sm font-medium px-4 py-2 rounded-xl transition">Sign Out</a>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Tool cards -->
+            <a href="/dashboard/sentiment" class="bg-slate-900 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 transition group shadow-xl">
+                <div class="text-3xl mb-4">📊</div>
+                <h3 class="text-xl font-bold text-slate-200 group-hover:text-indigo-400 transition">Sentiment Analysis</h3>
+                <p class="text-sm text-slate-400 mt-2">Evaluate contextual text strings to extract negative, neutral, and positive confidence metrics.</p>
+            </a>
+
+            <a href="/dashboard/emotion" class="bg-slate-900 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 transition group shadow-xl">
+                <div class="text-3xl mb-4">🎭</div>
+                <h3 class="text-xl font-bold text-slate-200 group-hover:text-indigo-400 transition">Emotion Prediction</h3>
+                <p class="text-sm text-slate-400 mt-2">Map complex textual variants across core parameters like Joy, Fear, Surprise, and Anger.</p>
+            </a>
+
+            <a href="/dashboard/ner" class="bg-slate-900 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 transition group shadow-xl">
+                <div class="text-3xl mb-4">🔍</div>
+                <h3 class="text-xl font-bold text-slate-200 group-hover:text-indigo-400 transition">Named Entity Matrix (NER)</h3>
+                <p class="text-sm text-slate-400 mt-2">Locate and isolate prominent entities including geographic variables, profiles, and corporate brands.</p>
+            </a>
+
+            <a href="/dashboard/summarizer" class="bg-slate-900 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 transition group shadow-xl">
+                <div class="text-3xl mb-4">📝</div>
+                <h3 class="text-xl font-bold text-slate-200 group-hover:text-indigo-400 transition">Smart Summarizer & TL;DR</h3>
+                <p class="text-sm text-slate-400 mt-2">Generate target read times, high-impact summaries, and core structural bullet points instantly.</p>
+            </a>
+
+            <a href="/dashboard/copilot" class="bg-slate-900 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 transition group shadow-xl">
+                <div class="text-3xl mb-4">🤖</div>
+                <h3 class="text-xl font-bold text-slate-200 group-hover:text-indigo-400 transition">Interactive AI Copilot</h3>
+                <p class="text-sm text-slate-400 mt-2">Execute custom structural guidelines, edge prompts, and deep non-standard content text queries.</p>
+            </a>
+
+            <a href="/dashboard/grammar" class="bg-slate-900 border border-slate-800 hover:border-indigo-500 rounded-2xl p-6 transition group shadow-xl">
+                <div class="text-3xl mb-4">✍️</div>
+                <h3 class="text-xl font-bold text-slate-200 group-hover:text-indigo-400 transition">Grammar & Tone Architect</h3>
+                <p class="text-sm text-slate-400 mt-2">Normalize syntax properties and scale text voices into an expert executive business persona.</p>
+            </a>
+
+            <a href="/dashboard/abuse" class="bg-slate-900 border border-indigo-500/50 hover:border-indigo-500 bg-gradient-to-br from-slate-900 to-indigo-950/20 rounded-2xl p-6 transition group shadow-xl col-span-1 md:col-span-2 lg:col-span-3">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="text-3xl mb-4">🔒</div>
+                        <h3 class="text-xl font-bold text-slate-200 group-hover:text-indigo-400 transition">Abuse & Toxicity Detection</h3>
+                        <p class="text-sm text-slate-400 mt-2">Isolate hazardous keywords, profile threats, aggressive languages, and compute risk matrices.</p>
+                    </div>
+                    <span class="bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs px-3 py-1 rounded-full font-semibold uppercase tracking-wider">New Core Vector</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

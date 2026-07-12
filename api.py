@@ -1,0 +1,39 @@
+import os
+import google.generativeai as genai
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Securely configure the SDK via environment variables
+API_KEY = os.getenv("GEMINI_API_KEY", "YOUR_FALLBACK_KEY_IF_NOT_USING_ENV")
+genai.configure(api_key=API_KEY)
+
+
+def analyze_text(text, analysis_type):
+    """
+    Unified execution pipeline handling all 7 analysis vectors.
+    Instructs the LLM to format responses natively for readable web display without raw markdown markers.
+    """
+    model = genai.GenerativeModel('gemini-2.5-flash')
+
+    formatting_instruction = "\n\nIMPORTANT: Do not use raw markdown tags like **, ##, or *. Present titles neatly on their own line, followed by clean list details below them."
+
+    prompts = {
+        "sentiment": "Analyze the sentiment of the following text. Return a clear breakdown of positive, negative, or neutral leaning with percentage weights." + formatting_instruction,
+        "emotion": "Perform detailed emotion prediction. Provide percentage distributions across Joy, Sadness, Anger, Fear, and Surprise." + formatting_instruction,
+        "ner": "Extract all major Named Entities (NER) from this text. List them clearly under distinct category headers such as Persons, Organizations, and Locations." + formatting_instruction,
+        "summarizer": "Provide a high-impact summary. Include a target read-time estimate, a single-sentence TL;DR, and core takeaways." + formatting_instruction,
+        "copilot": "Act as an interactive AI Copilot. Analyze the text, critique its structure, and give actionable suggestions to improve it." + formatting_instruction,
+        "grammar": "Act as a professional copyeditor. Rewrite the text to eliminate grammatical issues and optimize it into a polished, executive corporate tone." + formatting_instruction,
+        "abuse": "Perform safety and abuse detection. Flag any toxicity, profanity, hate speech, or aggressive intent, providing a clear risk severity ranking (Low/Medium/High)." + formatting_instruction
+    }
+
+    system_prompt = prompts.get(analysis_type, "Analyze the text thoroughly.")
+    full_prompt = f"{system_prompt}\n\nText to analyze:\n\"\"\"{text}\"\"\""
+
+    try:
+        response = model.generate_content(full_prompt)
+        # .strip() completely wipes out any accidental massive spaces or empty lines at the start
+        return response.text.strip()
+    except Exception as e:
+        return f"Engine Analysis Error: {str(e)}"

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} | Workstation Workspace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans flex flex-col">
+    <header class="bg-slate-900 border-b border-slate-800 px-8 py-4 flex justify-between items-center shadow-md">
+        <div class="flex items-center space-x-4">
+            <a href="/profile" class="text-slate-400 hover:text-slate-100 transition text-sm font-medium">&larr; Back to Hub</a>
+            <span class="text-slate-700">|</span>
+            <h1 class="text-xl font-bold text-slate-200">{{ title }}</h1>
+        </div>
+        <span class="bg-indigo-600/10 border border-indigo-500/30 text-indigo-400 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Engine Running</span>
+    </header>
+
+    <main class="flex-1 grid grid-cols-1 lg:grid-cols-2 p-8 gap-8 max-w-7xl mx-auto w-full">
+        <!-- Input Panel -->
+        <section class="flex flex-col h-full">
+            <h2 class="text-lg font-semibold text-slate-300 mb-3">Target Text Payload</h2>
+            <form action="/analyze/{{ analysis_type }}" method="POST" class="flex flex-col flex-1 space-y-4">
+                <textarea name="input_text" placeholder="Paste or write your raw text data block here..." required class="w-full flex-1 min-h-[400px] bg-slate-900 border border-slate-800 rounded-2xl p-5 text-slate-200 focus:outline-none focus:border-indigo-500 transition resize-none shadow-inner text-base leading-relaxed">{% if input_text %}{{ input_text }}{% endif %}</textarea>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-indigo-600/20 text-base">Compute Model Pipeline</button>
+            </form>
+        </section>
+
+        <!-- Output Panel -->
+        <section class="flex flex-col h-full">
+            <h2 class="text-lg font-semibold text-slate-300 mb-3">Structured Analytical Output</h2>
+            <div class="w-full flex-1 min-h-[400px] bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl overflow-y-auto">
+                {% if result %}
+                    <div class="flex items-center space-x-2 text-indigo-400 font-semibold mb-4 text-xs tracking-wider uppercase border-b border-slate-800 pb-3">
+                        <span class="flex h-2 w-2 relative">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                        <span>Analysis Generation Success</span>
+                    </div>
+
+                    <!-- Clean, human-readable text presentation -->
+                    <div class="text-slate-200 text-base leading-relaxed space-y-3 whitespace-pre-line font-sans">
+                        {{ result }}
+                    </div>
+                {% else %}
+                    <div class="text-slate-600 italic flex flex-col items-center justify-center h-full space-y-2">
+                        <span class="text-3xl">🎯</span>
+                        <span>Awaiting execution run command...</span>
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+</body>
+</html>
