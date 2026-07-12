@@ -1,21 +1,18 @@
 import os
-import google.generativeai as genai
+from google import genai
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# Securely configure the SDK via environment variables
-API_KEY = os.getenv("GEMINI_API_KEY", "YOUR_FALLBACK_KEY_IF_NOT_USING_ENV")
-genai.configure(api_key=API_KEY)
+# Initialize the modern unified client architecture
+# It automatically picks up GEMINI_API_KEY from your .env file
+client = genai.Client()
 
 
 def analyze_text(text, analysis_type):
     """
-    Unified execution pipeline handling all 7 analysis vectors.
-    Instructs the LLM to format responses natively for readable web display without raw markdown markers.
+    Unified execution pipeline using the modern google-genai SDK.
     """
-    model = genai.GenerativeModel('gemini-2.5-flash')
-
     formatting_instruction = "\n\nIMPORTANT: Do not use raw markdown tags like **, ##, or *. Present titles neatly on their own line, followed by clean list details below them."
 
     prompts = {
@@ -32,8 +29,11 @@ def analyze_text(text, analysis_type):
     full_prompt = f"{system_prompt}\n\nText to analyze:\n\"\"\"{text}\"\"\""
 
     try:
-        response = model.generate_content(full_prompt)
-        # .strip() completely wipes out any accidental massive spaces or empty lines at the start
+        # Modern SDK generation method call
+        response = client.models.generate_content(
+            model='gemini-2.5-flash',
+            contents=full_prompt
+        )
         return response.text.strip()
     except Exception as e:
         return f"Engine Analysis Error: {str(e)}"
